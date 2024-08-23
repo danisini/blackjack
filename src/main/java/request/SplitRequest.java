@@ -1,5 +1,5 @@
 package request;
 
 public class SplitRequest extends BaseRequest {
-    private Double stake;
+    private Double additionalStake;
 }
