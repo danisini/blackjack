@@ -11,14 +11,20 @@ public class GameState {
     private Boolean hasPlayerWon;
     private Boolean hasDealerWon;
     private Boolean isRoundOver;
+    private Boolean isStakeDoubled;
 
     private Double stake;
     private Double additionalStake;
+    private Double winAmount;
 
     private List<Card> playerHand;
     private List<Card> playerSplitHand;
     private List<Card> dealerHand;
 
+    public GameState() {
+
+    }
+    
     public Deck getDeck() {
         return deck;
     }
@@ -89,6 +95,14 @@ public class GameState {
 
     public void setDealerHand(List<Card> dealerHand) {
         this.dealerHand = dealerHand;
+    }
+
+    public Boolean getStakeDoubled() {
+        return isStakeDoubled;
+    }
+
+    public void setStakeDoubled(Boolean stakeDoubled) {
+        isStakeDoubled = stakeDoubled;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import request.HitRequest;
 import service.DeckService;
 import service.GameService;
 
@@ -14,6 +16,7 @@ import static util.CommonConstants.*;
 public class GameController {
     private final GameService gameService;
     private final DeckService deckService;
+    private ObjectMapper objectMapper;
 
     public GameController(GameService gameService, DeckService deckService) {
         this.gameService = gameService;
@@ -22,6 +25,7 @@ public class GameController {
 
     public HttpHandler start() {
         return exchange -> handle(exchange, GET, () -> {
+            //StartRequest startRequest = objectMapper.readValue(exchange.getRequestBody(), StartRequest.class);
             //gameService.startNewGame();
             return "New game started!";
         });
@@ -29,14 +33,33 @@ public class GameController {
 
     public HttpHandler hit() {
         return exchange -> handle(exchange, POST, () -> {
-            //gameService.playerHit();
+            //HitRequest hitRequest = objectMapper.readValue(exchange.getRequestBody(), HitRequest.class);
+
+            //gameService.playerHit(hitRequest);
             return "Hit!";
         });
     }
 
     public HttpHandler stand() {
         return exchange -> handle(exchange, POST, () -> {
+            //StandRequest standRequest = objectMapper.readValue(exchange.getRequestBody(), StandRequest.class);
             //gameService.stand();
+            return "standed!";
+        });
+    }
+
+    public HttpHandler doubleStake() {
+        return exchange -> handle(exchange, POST, () -> {
+            //DoubleRequest doubleRequest = objectMapper.readValue(exchange.getRequestBody(), DoubleRequest.class);
+            //gameService.doubleRequest();
+            return "standed!";
+        });
+    }
+
+    public HttpHandler split() {
+        return exchange -> handle(exchange, POST, () -> {
+            //SplitRequest SplitRequest = objectMapper.readValue(exchange.getRequestBody(), SplitRequest.class);
+            //gameService.split();
             return "standed!";
         });
     }
