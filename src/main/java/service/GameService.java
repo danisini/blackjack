@@ -1,4 +1,9 @@
 package service;
 
-public class GameService {
+public interface GameService {
+    void startNewGame();
+    void hitPlayer();
+    void stand();
+    void doubleStake();
+    void split();
 }

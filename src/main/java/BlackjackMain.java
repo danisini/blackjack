@@ -4,6 +4,9 @@ import config.ServerConfig;
 import controller.GameController;
 import service.DeckService;
 import service.GameService;
+import service.impl.DeckServiceImpl;
+import service.impl.GameServiceImpl;
+
 import java.io.IOException;
 
 public class BlackjackMain {
@@ -12,8 +15,8 @@ public class BlackjackMain {
     public static void main(String[] args) {
         try {
             ConfigLoader config = new ConfigLoader();
-            GameService gameService = new GameService();
-            DeckService deckService = new DeckService();
+            GameService gameService = new GameServiceImpl();
+            DeckService deckService = new DeckServiceImpl();
             GameController gameController = new GameController(gameService, deckService);
 
             ServerConfig serverConfig = new ServerConfig(gameController, config);
