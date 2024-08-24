@@ -3,6 +3,7 @@ package util;
 import model.Deck;
 import model.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameState {
@@ -16,15 +17,26 @@ public class GameState {
     private Double stake;
     private Double additionalStake;
     private Double winAmount;
+    private Double balance;
 
     private List<Card> playerHand;
     private List<Card> playerSplitHand;
     private List<Card> dealerHand;
 
     public GameState() {
+        deck = new Deck();
+        playerHand = new ArrayList<>();
+        playerSplitHand = new ArrayList<>();
+        dealerHand = new ArrayList<>();
+        hasPlayerWon = false;
+        hasDealerWon = false;
+        isRoundOver = false;
+        isStakeDoubled = false;
+        additionalStake = 0.0;
+        winAmount = 0.0;
 
     }
-    
+
     public Deck getDeck() {
         return deck;
     }
@@ -105,6 +117,22 @@ public class GameState {
         isStakeDoubled = stakeDoubled;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public Double getWinAmount() {
+        return winAmount;
+    }
+
+    public void setWinAmount(Double winAmount) {
+        this.winAmount = winAmount;
+    }
+
     @Override
     public String toString() {
         return "GameState{" +
@@ -112,8 +140,11 @@ public class GameState {
                 ", hasPlayerWon=" + hasPlayerWon +
                 ", hasDealerWon=" + hasDealerWon +
                 ", isRoundOver=" + isRoundOver +
+                ", isStakeDoubled=" + isStakeDoubled +
                 ", stake=" + stake +
                 ", additionalStake=" + additionalStake +
+                ", winAmount=" + winAmount +
+                ", balance=" + balance +
                 ", playerHand=" + playerHand +
                 ", playerSplitHand=" + playerSplitHand +
                 ", dealerHand=" + dealerHand +

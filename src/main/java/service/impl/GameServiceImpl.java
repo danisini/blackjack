@@ -1,30 +1,47 @@
 package service.impl;
 
+import action.BaseAction;
+import action.ResumeGameAction;
+import action.StartGameAction;
+import request.*;
+import response.*;
 import service.GameService;
+import util.GameState;
+
+import static util.CommonConstants.*;
 
 public class GameServiceImpl implements GameService {
-    @Override
-    public void startNewGame() {
 
+    @Override
+    public BaseResponse startNewGame(StartRequest request) {
+        GameState state = request.getState();
+        BaseAction<BaseResponse, StartRequest> action;
+
+        action = (state.getDeck().getRemainingCards() < MAX_NUMBER_OF_CARDS) ?
+                new ResumeGameAction() : new StartGameAction();
+
+        return action.doAction(request);
     }
 
     @Override
-    public void hitPlayer() {
-
+    public BaseResponse hit(HitRequest request) {
+        return null;
     }
 
     @Override
-    public void stand() {
-
+    public BaseResponse stand(StandRequest request) {
+        return null;
     }
 
     @Override
-    public void doubleStake() {
-
+    public BaseResponse doubleStake(DoubleRequest request) {
+        return null;
     }
 
     @Override
-    public void split() {
-
+    public BaseResponse split(SplitRequest request) {
+        return null;
     }
+
+
 }

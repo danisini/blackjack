@@ -3,7 +3,7 @@ package controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import request.HitRequest;
+import request.*;
 import service.DeckService;
 import service.GameService;
 
@@ -24,44 +24,40 @@ public class GameController {
     }
 
     public HttpHandler start() {
-        return exchange -> handle(exchange, GET, () -> {
-            //StartRequest startRequest = objectMapper.readValue(exchange.getRequestBody(), StartRequest.class);
-            //gameService.startNewGame();
-            return "New game started!";
-        });
+        return createHandler(GET, StartRequest.class, gameService::startNewGame, "Game started!");
     }
 
     public HttpHandler hit() {
-        return exchange -> handle(exchange, POST, () -> {
-            //HitRequest hitRequest = objectMapper.readValue(exchange.getRequestBody(), HitRequest.class);
-
-            //gameService.playerHit(hitRequest);
-            return "Hit!";
-        });
+        return createHandler(POST, HitRequest.class, gameService::hit, "Player hit!");
     }
 
     public HttpHandler stand() {
-        return exchange -> handle(exchange, POST, () -> {
-            //StandRequest standRequest = objectMapper.readValue(exchange.getRequestBody(), StandRequest.class);
-            //gameService.stand();
-            return "standed!";
-        });
+        return createHandler(POST, StandRequest.class, gameService::stand, "Player stands!");
     }
 
     public HttpHandler doubleStake() {
-        return exchange -> handle(exchange, POST, () -> {
-            //DoubleRequest doubleRequest = objectMapper.readValue(exchange.getRequestBody(), DoubleRequest.class);
-            //gameService.doubleRequest();
-            return "standed!";
-        });
+        return createHandler(POST, DoubleRequest.class, gameService::doubleStake, "Player doubled");
     }
 
     public HttpHandler split() {
-        return exchange -> handle(exchange, POST, () -> {
-            //SplitRequest SplitRequest = objectMapper.readValue(exchange.getRequestBody(), SplitRequest.class);
-            //gameService.split();
-            return "standed!";
+        return createHandler(POST, SplitRequest.class, gameService::split, "Player split");
+    }
+
+    private <T> HttpHandler createHandler(String requestType, Class<T> requestClass, RequestHandler<T> serviceMethod,
+                                          String successMessage) {
+        return exchange -> handle(exchange, requestType, () -> {
+            T request = parseRequest(exchange, requestClass);
+            serviceMethod.execute(request);
+            return successMessage;
         });
+    }
+
+    private <T> T parseRequest(HttpExchange exchange, Class<T> requestClass) {
+        try {
+            return objectMapper.readValue(exchange.getRequestBody(), requestClass);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to parse " + requestClass.getSimpleName(), e);
+        }
     }
 
     private void handle(HttpExchange exchange, String method, Supplier<String> action) throws IOException {
@@ -79,5 +75,4 @@ public class GameController {
             os.write(response.getBytes());
         }
     }
-
 }

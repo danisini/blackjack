@@ -13,4 +13,6 @@ public class CommonConstants {
 
     public static final String GET = "GET";
     public static final String POST = "POST";
+
+    public static final int MAX_NUMBER_OF_CARDS = 52;
 }

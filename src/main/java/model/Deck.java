@@ -34,7 +34,9 @@ public class Deck {
             throw new IllegalStateException(CANNOT_DEAL_FROM_AN_EMPTY_DECK);
         }
 
-        return cards.remove(0);
+        Card card = cards.remove(0);
+        shuffle();
+        return card;
     }
 
     public int getRemainingCards() {
