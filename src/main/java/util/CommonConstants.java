@@ -12,7 +12,7 @@ public class CommonConstants {
     public static final String APPLICATION_PROPERTIES = "application.properties";
     public static final String PORT = "server.port";
 
-    public static final String GET = "GET";
+    public static final String OK = "OK";
     public static final String POST = "POST";
 
     public static final int FIRST = 0;
