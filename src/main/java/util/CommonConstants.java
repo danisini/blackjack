@@ -20,6 +20,7 @@ public class CommonConstants {
     public static final int TWO = 2;
 
     public static final int MAX_NUMBER_OF_POINTS = 21;
+    public static final int DEALER_STANDING_POINTS = 17;
 
     public static final Double ZERO_STAKE = 0.0;
 }
