@@ -17,14 +17,8 @@ public class GameServiceImpl implements GameService {
     public BaseResponse startNewGame(StartRequest request) {
         validator.hasEnoughBalance(request, request.getStake());
         validator.isActionValid(request, START);
-
-        GameState state = request.getState();
-        BaseAction<BaseResponse, StartRequest> action;
-
-        action = !state.getPlayerHand().isEmpty() ?
-                new ResumeGameAction() : new StartGameAction();
-
-        return action.doAction(request);
+        
+        return new StartGameAction().doAction(request);
     }
 
     @Override
