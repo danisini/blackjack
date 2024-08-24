@@ -3,7 +3,7 @@ package action;
 import model.Card;
 import request.HitRequest;
 import response.BaseResponse;
-import responseBuilder.ResponseBuilder;
+import responseBuilder.impl.ResponseBuilderImpl;
 import util.GameState;
 
 import java.util.List;
@@ -29,6 +29,6 @@ public class HitAction extends BaseAction<BaseResponse, HitRequest> {
             state.getPlayerSplitHand().add(drawnCard);
         }
 
-        return new ResponseBuilder().buildResponse(state);
+        return new ResponseBuilderImpl().buildResponse(state);
     }
 }

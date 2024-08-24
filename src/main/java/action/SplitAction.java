@@ -3,7 +3,7 @@ package action;
 import model.Card;
 import request.SplitRequest;
 import response.BaseResponse;
-import responseBuilder.ResponseBuilder;
+import responseBuilder.impl.ResponseBuilderImpl;
 import util.GameState;
 
 import java.util.ArrayList;
@@ -24,6 +24,6 @@ public class SplitAction extends BaseAction<BaseResponse, SplitRequest> {
         state.setPlayerHand(playerHand);
         state.setPlayerSplitHand(splitHand);
 
-        return new ResponseBuilder().buildResponse(state);
+        return new ResponseBuilderImpl().buildResponse(state);
     }
 }

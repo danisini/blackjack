@@ -3,7 +3,7 @@ package action;
 import model.Card;
 import request.StandRequest;
 import response.BaseResponse;
-import responseBuilder.ResponseBuilder;
+import responseBuilder.impl.ResponseBuilderImpl;
 import util.BlackjackUtils;
 import util.GameState;
 
@@ -30,6 +30,6 @@ public class StandAction extends BaseAction<BaseResponse, StandRequest> {
         state.setDealerHand(dealerHand);
         state.setRoundOver(Boolean.TRUE);
 
-        return new ResponseBuilder().buildResponse(state);
+        return new ResponseBuilderImpl().buildResponse(state);
     }
 }

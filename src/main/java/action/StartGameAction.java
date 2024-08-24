@@ -3,7 +3,7 @@ package action;
 import model.Card;
 import request.StartRequest;
 import response.BaseResponse;
-import responseBuilder.ResponseBuilder;
+import responseBuilder.impl.ResponseBuilderImpl;
 import util.GameState;
 
 public class StartGameAction extends BaseAction<BaseResponse, StartRequest> {
@@ -23,6 +23,6 @@ public class StartGameAction extends BaseAction<BaseResponse, StartRequest> {
         Card firstDealerCard = deckService.drawCard();
         state.getDealerHand().add(firstDealerCard);
 
-        return new ResponseBuilder().buildResponse(state);
+        return new ResponseBuilderImpl().buildResponse(state);
     }
 }
