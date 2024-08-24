@@ -30,7 +30,6 @@ public class GameServiceImpl implements GameService {
     @Override
     public BaseResponse hit(HitRequest request) {
         validator.isActionValid(request, HIT);
-
         return new HitAction().doAction(request);
     }
 
@@ -58,6 +57,4 @@ public class GameServiceImpl implements GameService {
 
         return new SplitAction().doAction(request);
     }
-
-
 }

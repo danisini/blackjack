@@ -10,7 +10,7 @@ mvn clean install на проекта
 java -jar target/blackjack-1.0.0-SNAPSHOT.jar
 
 по този начин пускаме сървъра, след което пращаме следните заявки (Напр. през postman):
-за start:
+#Пример за start:
 {
 "state": {
 "hasPlayerWon": false,
@@ -23,31 +23,33 @@ java -jar target/blackjack-1.0.0-SNAPSHOT.jar
 "balance": 100.0,
 "playerHand": [],
 "playerSplitHand": [],
-"dealerHand": []
+"dealerHand": [],
+"possibleActions": ["/start"]
 },
 "balance": 100.0,
 "stake": 1.0
 }
 
-If we want to resume from previous game:
+#Example for HIT
+
 {
 "state": {
 "hasPlayerWon": false,
 "hasDealerWon": false,
 "isRoundOver": false,
 "isStakeDoubled": false,
-"stake": 0.0,
+"stake": 1.0,
 "additionalStake": 0.0,
 "winAmount": 0.0,
 "balance": 100.0,
 "playerHand": [
 {
 "suit":"HEARTS",
-"rank":"TWO"
+"rank":"JACK"
 },
 {
 "suit":"SPADES",
-"rank":"FOUR"
+"rank":"JACK"
 }
 ],
 "playerSplitHand": [],
@@ -55,16 +57,8 @@ If we want to resume from previous game:
 {
 "suit":"SPADES",
 "rank":"JACK"
-},
-{
-"suit":"DIAMONDS",
-"rank":"SEVEN"
 }
-]
-},
-"balance": 100.0,
-"stake": 1.0
+],
+"possibleActions": ["/hit", "/double", "/stand"]
 }
-
-For hit:
-
+}
