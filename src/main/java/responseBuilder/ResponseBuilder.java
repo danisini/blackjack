@@ -22,9 +22,10 @@ public  class ResponseBuilder {
         System.out.println("HERE RESP BUILDER 21");
         List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
+        System.out.println(dealerHand);
         List<String> possibleActions = new ArrayList<>();
 
-        if (canGameContinue(playerHand, dealerHand)) {
+        if (canGameContinue(playerHand, dealerHand, state.getRoundOver())) {
             if (isSplitPossible(playerHand))
                 possibleActions.add(SPLIT);
 
@@ -61,8 +62,8 @@ public  class ResponseBuilder {
         return playerHand.size() == TWO && playerHand.get(FIRST).getRank().equals(playerHand.get(SECOND).getRank());
     }
 
-    private Boolean canGameContinue(List<Card> playerHand, List<Card> dealerHand) {
-        return !isParticipantBusted(playerHand) && !isParticipantBusted(dealerHand);
+    private Boolean canGameContinue(List<Card> playerHand, List<Card> dealerHand, Boolean isRoundOver) {
+        return !isRoundOver && !isParticipantBusted(playerHand) && !isParticipantBusted(dealerHand);
     }
 
 }

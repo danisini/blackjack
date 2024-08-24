@@ -33,7 +33,7 @@ public class DoubleAction extends BaseAction <BaseResponse, DoubleRequest> {
 
         StandRequest standRequest = new StandRequest();
         standRequest.setState(state);
-        
+
         return new StandAction().doAction(standRequest);
     }
 }

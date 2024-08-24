@@ -25,28 +25,28 @@ public class GameController {
     }
 
     public HttpHandler start() {
-        return createHandler(GET, StartRequest.class, gameService::startNewGame);
+        return createHandler(StartRequest.class, gameService::startNewGame);
     }
 
     public HttpHandler hit() {
-        return createHandler(POST, HitRequest.class, gameService::hit);
+        return createHandler(HitRequest.class, gameService::hit);
     }
 
     public HttpHandler stand() {
-        return createHandler(POST, StandRequest.class, gameService::stand);
+        return createHandler(StandRequest.class, gameService::stand);
     }
 
     public HttpHandler doubleStake() {
-        return createHandler(POST, DoubleRequest.class, gameService::doubleStake);
+        return createHandler(DoubleRequest.class, gameService::doubleStake);
     }
 
     public HttpHandler split() {
-        return createHandler(POST, SplitRequest.class, gameService::split);
+        return createHandler(SplitRequest.class, gameService::split);
     }
 
-    private <T> HttpHandler createHandler(String requestType, Class<T> requestClass, RequestHandler<T> serviceMethod) {
-        return exchange -> handle(exchange, requestType, () -> {
-            String stringRequest = null;
+    private <T> HttpHandler createHandler(Class<T> requestClass, RequestHandler<T> serviceMethod) {
+        return exchange -> handle(exchange, POST, () -> {
+            String stringRequest;
             try {
                 stringRequest = readRequestBody(exchange.getRequestBody());
             } catch (IOException e) {

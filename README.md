@@ -62,3 +62,37 @@ java -jar target/blackjack-1.0.0-SNAPSHOT.jar
 "possibleActions": ["/hit", "/double", "/stand"]
 }
 }
+
+#Пример за /stand
+
+{
+"state": {
+"hasPlayerWon": false,
+"hasDealerWon": false,
+"isRoundOver": false,
+"isStakeDoubled": false,
+"stake": 1.0,
+"additionalStake": 0.0,
+"winAmount": 0.0,
+"balance": 100.0,
+"playerHand": [
+{
+"suit":"HEARTS",
+"rank":"JACK"
+},
+{
+"suit":"SPADES",
+"rank":"JACK"
+}
+],
+"playerSplitHand": [],
+"dealerHand": [
+{
+"suit":"CLUBS",
+"rank":"JACK"
+}
+],
+"possibleActions": ["/hit", "/double", "/stand"]
+}
+}
+

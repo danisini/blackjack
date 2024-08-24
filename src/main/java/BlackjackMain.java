@@ -14,7 +14,6 @@ public class BlackjackMain {
     //TODO: logger instead of system.err
     public static void main(String[] args) {
         try {
-            System.out.println("DEBUG1");
             GameService gameService = new GameServiceImpl();
             DeckService deckService = new DeckServiceImpl(new Deck());
             GameController gameController = new GameController(gameService, deckService);
