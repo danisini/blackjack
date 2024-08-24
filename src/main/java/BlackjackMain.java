@@ -1,5 +1,4 @@
 
-import config.ConfigLoader;
 import config.ServerConfig;
 import controller.GameController;
 import model.Deck;

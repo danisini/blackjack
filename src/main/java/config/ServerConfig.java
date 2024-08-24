@@ -15,7 +15,7 @@ public class ServerConfig {
     }
 
     private HttpServer setupServer(GameController gameController) throws IOException {
-        int port = Integer.parseInt(Config.getProperty(PORT));
+        int port = Integer.parseInt(ConfigLoader.getProperty(PORT));
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 
         server.createContext(START, gameController.start());
