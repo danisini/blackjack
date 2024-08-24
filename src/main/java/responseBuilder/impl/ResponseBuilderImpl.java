@@ -2,6 +2,7 @@ package responseBuilder.impl;
 
 import model.Card;
 import response.BaseResponse;
+import responseBuilder.ResponseBuilder;
 import util.GameState;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import static util.BlackjackUtils.*;
 import static util.CommonConstants.*;
 
-public  class ResponseBuilderImpl implements ResponseBuilder{
+public  class ResponseBuilderImpl implements ResponseBuilder {
     public BaseResponse buildResponse(GameState state) {
         updateState(state);
         return new BaseResponse(OK, state);
