@@ -32,7 +32,8 @@ public class StartGameAction extends BaseAction<BaseResponse, StartRequest> {
 
         state.getDealerHand().add(firstDealerCard);
         state.getDealerHand().add(secondDealerCard);
-
+        System.out.println("HERE");
+        System.out.println(state);
         ResponseBuilder response = new ResponseBuilder();
         return response.buildResponse(state);
     }

@@ -11,4 +11,22 @@ java -jar target/blackjack-1.0.0-SNAPSHOT.jar
 
 по този начин пускаме сървъра, след което пращаме следните заявки (Напр. през postman):
 за start:
+{
+"state": {
+"hasPlayerWon": false,
+"hasDealerWon": false,
+"isRoundOver": false,
+"isStakeDoubled": false,
+"stake": 0.0,
+"additionalStake": 0.0,
+"winAmount": 0.0,
+"balance": 100.0,
+"playerHand": [],
+"playerSplitHand": [],
+"dealerHand": []
+},
+"balance": 100.0,
+"stake": 1.0
+}
+
 

@@ -17,7 +17,7 @@ public class GameServiceImpl implements GameService {
         GameState state = request.getState();
         BaseAction<BaseResponse, StartRequest> action;
 
-        action = (state.getDeck().getRemainingCards() < MAX_NUMBER_OF_CARDS) ?
+        action = !state.getPlayerHand().isEmpty() ?
                 new ResumeGameAction() : new StartGameAction();
 
         return action.doAction(request);

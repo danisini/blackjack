@@ -1,6 +1,8 @@
 package controller;
 
+import response.BaseResponse;
+
 @FunctionalInterface
 public interface RequestHandler<T> {
-    void execute(T request);
+    BaseResponse execute(T request);
 }

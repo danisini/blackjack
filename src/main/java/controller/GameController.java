@@ -7,8 +7,8 @@ import request.*;
 import service.DeckService;
 import service.GameService;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
 
 import static util.CommonConstants.*;
@@ -21,40 +21,58 @@ public class GameController {
     public GameController(GameService gameService, DeckService deckService) {
         this.gameService = gameService;
         this.deckService = deckService;
+        objectMapper = new ObjectMapper();
     }
 
     public HttpHandler start() {
-        return createHandler(GET, StartRequest.class, gameService::startNewGame, "Game started!");
+        return createHandler(GET, StartRequest.class, gameService::startNewGame);
     }
 
     public HttpHandler hit() {
-        return createHandler(POST, HitRequest.class, gameService::hit, "Player hit!");
+        return createHandler(POST, HitRequest.class, gameService::hit);
     }
 
     public HttpHandler stand() {
-        return createHandler(POST, StandRequest.class, gameService::stand, "Player stands!");
+        return createHandler(POST, StandRequest.class, gameService::stand);
     }
 
     public HttpHandler doubleStake() {
-        return createHandler(POST, DoubleRequest.class, gameService::doubleStake, "Player doubled");
+        return createHandler(POST, DoubleRequest.class, gameService::doubleStake);
     }
 
     public HttpHandler split() {
-        return createHandler(POST, SplitRequest.class, gameService::split, "Player split");
+        return createHandler(POST, SplitRequest.class, gameService::split);
     }
 
-    private <T> HttpHandler createHandler(String requestType, Class<T> requestClass, RequestHandler<T> serviceMethod,
-                                          String successMessage) {
+    private <T> HttpHandler createHandler(String requestType, Class<T> requestClass, RequestHandler<T> serviceMethod) {
         return exchange -> handle(exchange, requestType, () -> {
-            T request = parseRequest(exchange, requestClass);
-            serviceMethod.execute(request);
-            return successMessage;
+            String stringRequest = null;
+            try {
+                stringRequest = readRequestBody(exchange.getRequestBody());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            T request = parseRequest(stringRequest, requestClass);
+
+            System.out.println(request.toString());
+            return String.valueOf(serviceMethod.execute(request));
         });
     }
 
-    private <T> T parseRequest(HttpExchange exchange, Class<T> requestClass) {
+    private String readRequestBody(InputStream inputStream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString().trim(); // Return as a single string
+        }
+    }
+
+    private <T> T parseRequest(String request, Class<T> requestClass) {
         try {
-            return objectMapper.readValue(exchange.getRequestBody(), requestClass);
+            return objectMapper.readValue(request, requestClass);
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse " + requestClass.getSimpleName(), e);
         }

@@ -1,14 +1,14 @@
 package util;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import model.Deck;
 import model.Card;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameState {
-    private Deck deck;
-
     private Boolean hasPlayerWon;
     private Boolean hasDealerWon;
     private Boolean isRoundOver;
@@ -24,7 +24,6 @@ public class GameState {
     private List<Card> dealerHand;
 
     public GameState() {
-        deck = new Deck();
         playerHand = new ArrayList<>();
         playerSplitHand = new ArrayList<>();
         dealerHand = new ArrayList<>();
@@ -35,14 +34,6 @@ public class GameState {
         additionalStake = 0.0;
         winAmount = 0.0;
 
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
     }
 
     public Boolean getHasPlayerWon() {
@@ -59,6 +50,14 @@ public class GameState {
 
     public void setHasDealerWon(Boolean hasDealerWon) {
         this.hasDealerWon = hasDealerWon;
+    }
+
+    public Boolean getStakeDoubled() {
+        return isStakeDoubled;
+    }
+
+    public void setStakeDoubled(Boolean stakeDoubled) {
+        isStakeDoubled = stakeDoubled;
     }
 
     public Boolean getRoundOver() {
@@ -85,6 +84,22 @@ public class GameState {
         this.additionalStake = additionalStake;
     }
 
+    public Double getWinAmount() {
+        return winAmount;
+    }
+
+    public void setWinAmount(Double winAmount) {
+        this.winAmount = winAmount;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     public List<Card> getPlayerHand() {
         return playerHand;
     }
@@ -109,34 +124,9 @@ public class GameState {
         this.dealerHand = dealerHand;
     }
 
-    public Boolean getStakeDoubled() {
-        return isStakeDoubled;
-    }
-
-    public void setStakeDoubled(Boolean stakeDoubled) {
-        isStakeDoubled = stakeDoubled;
-    }
-
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
-    public Double getWinAmount() {
-        return winAmount;
-    }
-
-    public void setWinAmount(Double winAmount) {
-        this.winAmount = winAmount;
-    }
-
     @Override
     public String toString() {
         return "GameState{" +
-                "deck=" + deck +
                 ", hasPlayerWon=" + hasPlayerWon +
                 ", hasDealerWon=" + hasDealerWon +
                 ", isRoundOver=" + isRoundOver +
