@@ -22,6 +22,8 @@ public  class ResponseBuilder {
         System.out.println("HERE RESP BUILDER 21");
         List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
+        List<Card> splitHand = state.getPlayerSplitHand();
+
         System.out.println(dealerHand);
         List<String> possibleActions = new ArrayList<>();
 
@@ -34,21 +36,19 @@ public  class ResponseBuilder {
             possibleActions.add(HIT);
         } else {
             possibleActions.add(START);
-            Boolean hasPlayerWon = hasPlayerWon(playerHand, dealerHand);
+            Boolean hasFirstHandPlayerWon = hasPlayerWon(playerHand, dealerHand);
             Boolean hasDealerWon = hasDealerWon(playerHand, dealerHand);
+            Boolean hasPlayerSpiltWon = hasPlayerWon(splitHand, dealerHand);
+            Boolean hasPlayerWon = hasPlayerSpiltWon || hasPlayerSpiltWon;
 
             state.setHasPlayerWon(hasPlayerWon);
             state.setHasDealerWon(hasDealerWon);
             state.setRoundOver(hasDealerWon || hasPlayerWon);
 
             if (hasPlayerWon) {
-                state.setWinAmount(state.getStake() + state.getAdditionalStake());
-                if (state.getStakeDoubled())
-                    state.setWinAmount(state.getWinAmount() * TWO);
-
-                state.setBalance(state.getBalance() + state.getWinAmount());
+                calculateWinAmount(state, hasFirstHandPlayerWon, hasPlayerSpiltWon);
             } else if (hasDealerWon) {
-                state.setBalance(state.getBalance() - (state.getStake() + state.getAdditionalStake()));
+                calculateLostAmount(state);
             }
 
             state.setStake(ZERO_STAKE);
@@ -56,6 +56,24 @@ public  class ResponseBuilder {
         }
 
         state.setPossibleActions(possibleActions);
+    }
+
+    private static void calculateLostAmount(GameState state) {
+        Double lostAmount = state.getStake() + state.getAdditionalStake();
+        if (state.getStakeDoubled()) lostAmount *= TWO;
+
+        state.setBalance(state.getBalance() - lostAmount);
+    }
+
+    private static void calculateWinAmount(GameState state, Boolean hasFirstHandPlayerWon, Boolean hasPlayerSpiltWon) {
+        Double winAmount = 0.0;
+        if (hasFirstHandPlayerWon) winAmount += state.getStake();
+        if (hasPlayerSpiltWon) winAmount += state.getAdditionalStake();
+        if (state.getStakeDoubled())
+            winAmount *= TWO;
+
+        state.setWinAmount(winAmount);
+        state.setBalance(state.getBalance() + state.getWinAmount());
     }
 
     private Boolean isSplitPossible(List<Card> playerHand) {

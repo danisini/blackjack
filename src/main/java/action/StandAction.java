@@ -17,6 +17,7 @@ public class StandAction extends BaseAction<BaseResponse, StandRequest> {
         GameState state = request.getState();
         List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
+        List<Card> splitHand = state.getPlayerSplitHand();
 
         System.out.println("POINTS:");
         System.out.println(BlackjackUtils.calculateHandValue(dealerHand));
@@ -24,7 +25,7 @@ public class StandAction extends BaseAction<BaseResponse, StandRequest> {
             Card drawnCard;
             do {
                 drawnCard = deckService.drawCard();
-            } while (playerHand.contains(drawnCard) || dealerHand.contains(drawnCard));
+            } while (playerHand.contains(drawnCard) || dealerHand.contains(drawnCard) || splitHand.contains(drawnCard));
 
             System.out.println("DRAWN CARD");
             System.out.println(drawnCard);

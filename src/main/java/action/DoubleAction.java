@@ -17,6 +17,7 @@ import static util.CommonConstants.SECOND;
 public class DoubleAction extends BaseAction <BaseResponse, DoubleRequest> {
     @Override
     public BaseResponse doAction(DoubleRequest request) {
+        System.out.println("HERE DOUBLE");
         GameState state = request.getState();
         state.setStakeDoubled(Boolean.TRUE);
 

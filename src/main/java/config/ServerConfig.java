@@ -22,7 +22,7 @@ public class ServerConfig {
         server.createContext(HIT, gameController.hit());
         server.createContext(STAND, gameController.stand());
         server.createContext(SPLIT, gameController.split());
-        server.createContext(DOUBLE, gameController.split());
+        server.createContext(DOUBLE, gameController.doubleStake());
 
         return server;
     }
