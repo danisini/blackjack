@@ -1,8 +1,6 @@
 package service.impl;
 
-import action.BaseAction;
-import action.ResumeGameAction;
-import action.StartGameAction;
+import action.*;
 import request.*;
 import response.*;
 import service.GameService;
@@ -33,14 +31,15 @@ public class GameServiceImpl implements GameService {
     public BaseResponse hit(HitRequest request) {
         validator.isActionValid(request, HIT);
 
-        return null;
+        return new HitAction().doAction(request);
     }
 
     @Override
     public BaseResponse stand(StandRequest request) {
         Validator validator = new ValidatorImpl();
         validator.isActionValid(request, STAND);
-        return null;
+
+        return new StandAction().doAction(request);
     }
 
     @Override
@@ -48,14 +47,16 @@ public class GameServiceImpl implements GameService {
         validator.isActionValid(request, DOUBLE);
         validator.hasEnoughBalance(request,
                 (request.getState().getStake() + request.getState().getAdditionalStake()) * TWO);
-        return null;
+
+        return new DoubleAction().doAction(request);
     }
 
     @Override
     public BaseResponse split(SplitRequest request) {
         validator.isActionValid(request, SPLIT);
         validator.hasEnoughBalance(request, request.getState().getStake() + request.getAdditionalStake());
-        return null;
+
+        return new SplitAction().doAction(request);
     }
 
 
