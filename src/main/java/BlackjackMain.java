@@ -8,20 +8,21 @@ import service.impl.DeckServiceImpl;
 import service.impl.GameServiceImpl;
 
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BlackjackMain {
+    private static final Logger logger = LoggerFactory.getLogger(BlackjackMain.class);
 
-    //TODO: logger instead of system.err
     public static void main(String[] args) {
         try {
             GameService gameService = new GameServiceImpl();
-            DeckService deckService = new DeckServiceImpl(new Deck());
-            GameController gameController = new GameController(gameService, deckService);
+            GameController gameController = new GameController(gameService);
 
             ServerConfig serverConfig = new ServerConfig(gameController);
             serverConfig.start();
         } catch (IOException e) {
-            System.err.println("Failed to start the server: " + e.getMessage());
+            logger.info("Failed to start the server: {}", e.getMessage());
         }
     }
 }

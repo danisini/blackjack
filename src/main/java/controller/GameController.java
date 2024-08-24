@@ -4,23 +4,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import request.*;
-import service.DeckService;
 import service.GameService;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static util.CommonConstants.*;
 
 public class GameController {
+    private static final Logger logger = LoggerFactory.getLogger(GameController.class);
     private final GameService gameService;
-    private final DeckService deckService;
     private ObjectMapper objectMapper;
 
-    public GameController(GameService gameService, DeckService deckService) {
+    public GameController(GameService gameService) {
         this.gameService = gameService;
-        this.deckService = deckService;
         objectMapper = new ObjectMapper();
     }
 
@@ -50,6 +50,7 @@ public class GameController {
             try {
                 stringRequest = readRequestBody(exchange.getRequestBody());
             } catch (IOException e) {
+                logger.info("Couldn't read request body for :{}", e.getMessage());
                 throw new RuntimeException(e);
             }
             T request = parseRequest(stringRequest, requestClass);
@@ -72,6 +73,7 @@ public class GameController {
         try {
             return objectMapper.readValue(request, requestClass);
         } catch (IOException e) {
+            logger.info("Couldn't parse request: {}", e.getMessage());
             throw new RuntimeException("Failed to parse " + requestClass.getSimpleName(), e);
         }
     }
@@ -81,6 +83,7 @@ public class GameController {
             String response = action.get();
             sendResponse(exchange, response, 200);
         } else {
+            logger.info("Method not allowed: {}", method);
             sendResponse(exchange, "Method Not Allowed", 405);
         }
     }
