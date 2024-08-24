@@ -28,11 +28,9 @@ public class StartGameAction extends BaseAction<BaseResponse, StartRequest> {
         state.getPlayerHand().add(secondPlayerCard);
 
         Card firstDealerCard = deckService.drawCard();
-        Card secondDealerCard = deckService.drawCard();
-
         state.getDealerHand().add(firstDealerCard);
-        state.getDealerHand().add(secondDealerCard);
-        System.out.println("HERE");
+
+        System.out.println("HERE GAME ACTION 33");
         System.out.println(state);
         ResponseBuilder response = new ResponseBuilder();
         return response.buildResponse(state);

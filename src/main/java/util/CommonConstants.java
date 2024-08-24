@@ -7,6 +7,7 @@ public class CommonConstants {
     public static final String STAND = "/stand";
     public static final String SPLIT = "/split";
     public static final String START = "/start";
+    public static final String DOUBLE = "/double";
 
     public static final String APPLICATION_PROPERTIES = "application.properties";
     public static final String PORT = "server.port";
@@ -14,5 +15,11 @@ public class CommonConstants {
     public static final String GET = "GET";
     public static final String POST = "POST";
 
-    public static final int MAX_NUMBER_OF_CARDS = 52;
+    public static final int FIRST = 0;
+    public static final int SECOND = 1;
+    public static final int TWO = 2;
+
+    public static final int MAX_NUMBER_OF_POINTS = 21;
+
+    public static final Double ZERO_STAKE = 0.0;
 }

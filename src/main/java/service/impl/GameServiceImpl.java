@@ -7,6 +7,8 @@ import request.*;
 import response.*;
 import service.GameService;
 import util.GameState;
+import validation.Validator;
+import validation.impl.ValidatorImpl;
 
 import static util.CommonConstants.*;
 
@@ -14,10 +16,13 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public BaseResponse startNewGame(StartRequest request) {
+        Validator validator = new ValidatorImpl();
+        validator.hasEnoughBalance(request, request.getStake());
+        validator.isActionValid(request, START);
+
         GameState state = request.getState();
         BaseAction<BaseResponse, StartRequest> action;
 
-        System.out.println("HERE");
         action = !state.getPlayerHand().isEmpty() ?
                 new ResumeGameAction() : new StartGameAction();
 

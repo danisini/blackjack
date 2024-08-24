@@ -19,6 +19,7 @@ public class GameState {
     private Double winAmount;
     private Double balance;
 
+    private List<String> possibleActions;
     private List<Card> playerHand;
     private List<Card> playerSplitHand;
     private List<Card> dealerHand;
@@ -34,6 +35,14 @@ public class GameState {
         additionalStake = 0.0;
         winAmount = 0.0;
 
+    }
+
+    public List<String> getPossibleActions() {
+        return possibleActions;
+    }
+
+    public void setPossibleActions(List<String> possibleActions) {
+        this.possibleActions = possibleActions;
     }
 
     public Boolean getHasPlayerWon() {
@@ -138,6 +147,7 @@ public class GameState {
                 ", playerHand=" + playerHand +
                 ", playerSplitHand=" + playerSplitHand +
                 ", dealerHand=" + dealerHand +
+                ", possibleActions=" + possibleActions +
                 '}';
     }
 }
