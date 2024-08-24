@@ -37,7 +37,6 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public BaseResponse doubleStake(DoubleRequest request) {
-        System.out.println("SERVICE 40");
         validator.isActionValid(request, DOUBLE);
         validator.hasEnoughBalance(request,
                 (request.getState().getStake() + request.getState().getAdditionalStake()) * TWO);
@@ -50,7 +49,6 @@ public class GameServiceImpl implements GameService {
         validator.isActionValid(request, SPLIT);
         validator.hasEnoughBalance(request, request.getState().getStake() + request.getAdditionalStake());
 
-        System.out.println("IN GAME SERVICE 52");
         return new SplitAction().doAction(request);
     }
 }

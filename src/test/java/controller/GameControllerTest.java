@@ -45,7 +45,6 @@ public class GameControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         StartRequest startRequest = objectMapper.readValue(json, StartRequest.class);
 
-        System.out.println(startRequest.getState().getBalance());
     }
 
 

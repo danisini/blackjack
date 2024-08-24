@@ -19,12 +19,10 @@ public  class ResponseBuilder {
     }
 
     private void updateState(GameState state) {
-        System.out.println("HERE RESP BUILDER 21");
         List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
         List<Card> splitHand = state.getPlayerSplitHand();
 
-        System.out.println(dealerHand);
         List<String> possibleActions = new ArrayList<>();
 
         if (canGameContinue(playerHand, dealerHand, state.getRoundOver())) {

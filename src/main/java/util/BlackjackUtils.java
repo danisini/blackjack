@@ -20,7 +20,6 @@ public class BlackjackUtils {
             }
             value += rank.getValue();
         }
-        System.out.println("CURRENT RANK: " + value);
 
         while (value > MAX_NUMBER_OF_POINTS && numberOfAces > 0) {
             value -= 10;

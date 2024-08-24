@@ -14,7 +14,6 @@ import static util.CommonConstants.*;
 public class SplitAction extends BaseAction<BaseResponse, SplitRequest> {
     @Override
     public BaseResponse doAction(SplitRequest request) {
-        System.out.println("In SPLIT ACTION");
         GameState state = request.getState();
         state.setAdditionalStake(request.getAdditionalStake());
 

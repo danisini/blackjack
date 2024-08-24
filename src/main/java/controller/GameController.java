@@ -52,11 +52,7 @@ public class GameController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println(stringRequest);
             T request = parseRequest(stringRequest, requestClass);
-
-            System.out.println("CONTROLER 58");
-            System.out.println(request.toString());
             return String.valueOf(serviceMethod.execute(request));
         });
     }

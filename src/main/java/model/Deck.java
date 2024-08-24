@@ -35,12 +35,8 @@ public class Deck {
         }
 
         Card card = cards.remove(0);
-        System.out.println("CARD is:");
-        System.out.println(card);
-        System.out.println("DECK has");
-        System.out.println(cards.size());
-
         shuffle();
+
         return card;
     }
 

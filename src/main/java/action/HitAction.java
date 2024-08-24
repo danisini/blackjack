@@ -13,7 +13,6 @@ import static util.CommonConstants.FIRST;
 public class HitAction extends BaseAction<BaseResponse, HitRequest> {
     @Override
     public BaseResponse doAction(HitRequest request) {
-        System.out.println("HIT ACTION 14");
         GameState state = request.getState();
         List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
