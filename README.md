@@ -29,4 +29,42 @@ java -jar target/blackjack-1.0.0-SNAPSHOT.jar
 "stake": 1.0
 }
 
+If we want to resume from previous game:
+{
+"state": {
+"hasPlayerWon": false,
+"hasDealerWon": false,
+"isRoundOver": false,
+"isStakeDoubled": false,
+"stake": 0.0,
+"additionalStake": 0.0,
+"winAmount": 0.0,
+"balance": 100.0,
+"playerHand": [
+{
+"suit":"HEARTS",
+"rank":"TWO"
+},
+{
+"suit":"SPADES",
+"rank":"FOUR"
+}
+],
+"playerSplitHand": [],
+"dealerHand": [
+{
+"suit":"SPADES",
+"rank":"JACK"
+},
+{
+"suit":"DIAMONDS",
+"rank":"SEVEN"
+}
+]
+},
+"balance": 100.0,
+"stake": 1.0
+}
+
+For hit:
 

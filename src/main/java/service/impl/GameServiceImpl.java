@@ -17,6 +17,7 @@ public class GameServiceImpl implements GameService {
         GameState state = request.getState();
         BaseAction<BaseResponse, StartRequest> action;
 
+        System.out.println("HERE");
         action = !state.getPlayerHand().isEmpty() ?
                 new ResumeGameAction() : new StartGameAction();
 

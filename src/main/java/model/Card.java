@@ -1,9 +1,12 @@
 package model;
 
 public class Card {
-    private final Suit suit;
-    private final Rank rank;
+    private Suit suit;
+    private Rank rank;
 
+    public Card() {
+
+    }
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;

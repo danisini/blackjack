@@ -7,6 +7,8 @@ public class ResumeGameAction extends BaseAction<BaseResponse, StartRequest> {
 
     @Override
     public BaseResponse doAction(StartRequest request) {
-        return null;
+        request.getState().setStake(request.getStake());
+        System.out.println(request);
+        return new BaseResponse("Resumed successfully", request.getState());
     }
 }

@@ -20,8 +20,28 @@ public class GameControllerTest {
 
     @Test
     public void testDeserialization() throws IOException {
-        String json = "{ \"state\": { \"hasPlayerWon\": false, \"hasDealerWon\": false, \"isRoundOver\": false, \"isStakeDoubled\": false, \"stake\": 0.0, \"additionalStake\": 0.0, \"winAmount\": 0.0, \"balance\": 100.0, \"playerHand\": [], \"playerSplitHand\": [], \"dealerHand\": [] }, \"balance\": 100.0, \"stake\": 1.0 }";
-
+        String json = "{\n" +
+                "  \"state\": {\n" +
+                "    \"hasPlayerWon\": false,\n" +
+                "    \"hasDealerWon\": false,\n" +
+                "    \"isRoundOver\": false,\n" +
+                "    \"isStakeDoubled\": true,\n" +
+                "    \"stake\": 50,\n" +
+                "    \"additionalStake\": 50,\n" +
+                "    \"winAmount\": 0,\n" +
+                "    \"balance\": 900,\n" +
+                "    \"playerHand\": [\n" +
+                "      {\"suit\": \"Hearts\", \"rank\": \"10\"},\n" +
+                "      {\"suit\": \"Spades\", \"rank\": \"7\"}\n" +
+                "    ],\n" +
+                "    \"playerSplitHand\": [],\n" +
+                "    \"dealerHand\": [\n" +
+                "      {\"suit\": \"Diamonds\", \"rank\": \"5\"}\n" +
+                "    ]\n" +
+                "  },\n" +
+                "  \"balance\": 100.0,\n" +
+                "  \"stake\": 1.0\n" +
+                "}";
         ObjectMapper objectMapper = new ObjectMapper();
         StartRequest startRequest = objectMapper.readValue(json, StartRequest.class);
 
