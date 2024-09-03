@@ -1,9 +1,11 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import request.*;
+import response.BaseResponse;
 import service.GameService;
 
 import java.io.*;
@@ -54,7 +56,11 @@ public class GameController {
                 throw new RuntimeException(e);
             }
             T request = parseRequest(stringRequest, requestClass);
-            return String.valueOf(serviceMethod.execute(request));
+            try {
+                return objectMapper.writeValueAsString(serviceMethod.execute(request));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 

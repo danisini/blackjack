@@ -23,11 +23,13 @@ public class GameState {
     private List<Card> playerHand;
     private List<Card> playerSplitHand;
     private List<Card> dealerHand;
+    private List<Card> cardsDealt;
 
     public GameState() {
         playerHand = new ArrayList<>();
         playerSplitHand = new ArrayList<>();
         dealerHand = new ArrayList<>();
+        cardsDealt = new ArrayList<>();
         hasPlayerWon = false;
         hasDealerWon = false;
         isRoundOver = false;
@@ -133,6 +135,14 @@ public class GameState {
         this.dealerHand = dealerHand;
     }
 
+    public List<Card> getCardsDealt() {
+        return cardsDealt;
+    }
+
+    public void setCardsDealt(List<Card> cardsDealt) {
+        this.cardsDealt = cardsDealt;
+    }
+
     @Override
     public String toString() {
         return "GameState{" +
@@ -148,6 +158,7 @@ public class GameState {
                 ", playerSplitHand=" + playerSplitHand +
                 ", dealerHand=" + dealerHand +
                 ", possibleActions=" + possibleActions +
+                ", cardsDealt=" + cardsDealt +
                 '}';
     }
 }

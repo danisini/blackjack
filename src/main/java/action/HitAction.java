@@ -14,20 +14,19 @@ public class HitAction extends BaseAction<BaseResponse, HitRequest> {
     @Override
     public BaseResponse doAction(HitRequest request) {
         GameState state = request.getState();
-        List<Card> playerHand = state.getPlayerHand();
-        List<Card> dealerHand = state.getDealerHand();
-        List<Card> splitHand = state.getPlayerSplitHand();
+        List<Card> cardsDealt = state.getCardsDealt();
 
         Card drawnCard;
         do {
             drawnCard = deckService.drawCard();
-        } while (playerHand.contains(drawnCard) || dealerHand.contains(drawnCard) || splitHand.contains(drawnCard));
+        } while (cardsDealt.contains(drawnCard));
 
         if (request.getHandNumber() == FIRST) {
             state.getPlayerHand().add(drawnCard);
         } else {
             state.getPlayerSplitHand().add(drawnCard);
         }
+        state.getCardsDealt().add(drawnCard);
 
         return new ResponseBuilderImpl().buildResponse(state);
     }

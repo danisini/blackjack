@@ -23,6 +23,10 @@ public class StartGameAction extends BaseAction<BaseResponse, StartRequest> {
         Card firstDealerCard = deckService.drawCard();
         state.getDealerHand().add(firstDealerCard);
 
+        state.getCardsDealt().add(firstPlayerCard);
+        state.getCardsDealt().add(secondPlayerCard);
+        state.getCardsDealt().add(firstDealerCard);
+
         return new ResponseBuilderImpl().buildResponse(state);
     }
 }

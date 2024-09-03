@@ -15,15 +15,15 @@ public class DoubleAction extends BaseAction <BaseResponse, DoubleRequest> {
         state.setStakeDoubled(Boolean.TRUE);
 
         List<Card> playerHand = state.getPlayerHand();
-        List<Card> dealerHand = state.getDealerHand();
+        List<Card> cardsDealt = state.getCardsDealt();
 
         Card drawnCard;
         do {
             drawnCard = deckService.drawCard();
-        } while (playerHand.contains(drawnCard) || dealerHand.contains(drawnCard));
+        } while (cardsDealt.contains(drawnCard));
 
-        playerHand.add(drawnCard);
-        state.setPlayerHand(playerHand);
+        state.getCardsDealt().add(drawnCard);
+        state.getPlayerHand().add(drawnCard);
 
         StandRequest standRequest = new StandRequest();
         standRequest.setState(state);

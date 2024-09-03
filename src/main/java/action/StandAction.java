@@ -15,19 +15,21 @@ public class StandAction extends BaseAction<BaseResponse, StandRequest> {
     @Override
     public BaseResponse doAction(StandRequest request) {
         GameState state = request.getState();
-        List<Card> playerHand = state.getPlayerHand();
         List<Card> dealerHand = state.getDealerHand();
-        List<Card> splitHand = state.getPlayerSplitHand();
+        List<Card> cardsDealt = state.getCardsDealt();
 
         while (BlackjackUtils.calculateHandValue(dealerHand) <= DEALER_STANDING_POINTS) {
             Card drawnCard;
             do {
                 drawnCard = deckService.drawCard();
-            } while (playerHand.contains(drawnCard) || dealerHand.contains(drawnCard) || splitHand.contains(drawnCard));
+            } while (cardsDealt.contains(drawnCard));
 
+            cardsDealt.add(drawnCard);
             dealerHand.add(drawnCard);
         }
+
         state.setDealerHand(dealerHand);
+        state.setCardsDealt(cardsDealt);
         state.setRoundOver(Boolean.TRUE);
 
         return new ResponseBuilderImpl().buildResponse(state);
